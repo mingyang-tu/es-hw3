@@ -45,18 +45,14 @@ try :
     if (ch.supportsRead()):
         print(ch.read())
 
-    print("Before enable notifications: " + ch.propertiesToString())
-    cccd = ch.valHandle + 1
-    dev.writeCharacteristic(cccd, b"\x01\x00")
+    print("Properties: " + ch.propertiesToString())
+    cccd = ch.getDescriptors(forUUID=0x2902)[0]
+    cccd.write(b"\x01\x00")
     print("Enabled notifications.")
-    print("After enable notifications: " + ch.propertiesToString())
-    i = 0
+    print(cccd.read())
     while True:
-        if dev.waitForNotifications(3.0):
-            i += 3
-            if (i > 1000):
-                break
-            continue
+        if dev.waitForNotifications(1000):
+            print("Notify!")
         print("Waiting...")
 
 finally:
