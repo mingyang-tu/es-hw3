@@ -12,37 +12,37 @@
 
 ```python
 class ScanDelegate(DefaultDelegate):
-	def __init__(self):
-		DefaultDelegate.__init__(self)
-	def handleDiscovery(self, dev, isNewDev, isNewData):
-		if isNewDev:
-			print("Discovered device", dev.addr)
-		elif isNewData:
-			print("Received new data from", dev.addr)
-	# Processing data of notifications from the server
-	def handleNotification(self, cHandle, data): <--
-		print("Received data: " + str(data)) <--
+    def __init__(self):
+        DefaultDelegate.__init__(self)
+    def handleDiscovery(self, dev, isNewDev, isNewData):
+        if isNewDev:
+            print("Discovered device", dev.addr)
+        elif isNewData:
+            print("Received new data from", dev.addr)
+    # Processing data of notifications from the server
+    def handleNotification(self, cHandle, data): <--
+        print("Received data: " + str(data)) 	 <--
 ```
 
 ```python
 try :
-	testService = dev.getServiceByUUID(UUID(0xfff0))
-	for ch in testService.getCharacteristics():
-		print(str(ch))
-	
-	ch = dev.getCharacteristics(uuid=UUID(0xfff1))[0]
-	if (ch.supportsRead()):
-		print(ch.read())
+    testService = dev.getServiceByUUID(UUID(0xfff0))
+    for ch in testService.getCharacteristics():
+        print(str(ch))
 
-	cccd = ch.getDescriptors(forUUID=0x2902)[0] <--
-	cccd.write(b"\x01\x00")                     <--
-	print("Enabled notifications.")             <--
-	print(cccd.read())                          <--
+    ch = dev.getCharacteristics(uuid=UUID(0xfff1))[0]
+    if (ch.supportsRead()):
+        print(ch.read())
 
-	while True:                                 <--
-		if dev.waitForNotifications(1000):  	<--
-			print("Notify!")            		<--
-		print("Waiting...")                 	<--
+    cccd = ch.getDescriptors(forUUID=0x2902)[0] <--
+    cccd.write(b"\x01\x00")                     <--
+    print("Enabled notifications.")             <--
+    print(cccd.read())                          <--
+
+    while True:                                 <--
+        if dev.waitForNotifications(1000):  	<--
+            print("Notify!")            		<--
+        print("Waiting...")                 	<--
 ```
 
 ## sudo minicom -s
