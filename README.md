@@ -8,7 +8,7 @@
 - 涂銘洋 b07202031
 - 古振宏 b08901103
 
-## codes added
+## Codes added
 
 ```
 	class ScanDelegate(DefaultDelegate):
@@ -21,7 +21,7 @@
 				print("Received new data from", dev.addr)
 		#Processing data of notifications from the server
 		def handleNotification(self, cHandle, data): <--
-			print("Received data: " + str(data))     <--
+			print("Received data: " + str(data)) <--
 ```
 
 ```
@@ -40,26 +40,27 @@ try :
 	print(cccd.read())                          <--
 
 	while True:                                 <--
-		if dev.waitForNotifications(1000):      <--
-			print("Notify!")                    <--
-		print("Waiting...")                     <--
+		if dev.waitForNotifications(1000):  <--
+			print("Notify!")            <--
+		print("Waiting...")                m<--
 ```
 
-### sudo minicom -s
+## sudo minicom -s
 
 Configurations -> Serial port setup -> Serial Device : /dev/tty.usbserial-xxx(checked by 'ls /dev' on terminal)
 
-### sudo minicom
+## sudo minicom
 
 log in raspberry pi
 
-### Open iPhone app 'BLE scanner'
+## Open iPhone app 'BLE scanner'
 
 Configurations : 
 - properties : READ WRITE NOTIFY
 - READ value
 - service UUID : FFF0
 - characteristic UUID : FFF1
+
 Start advertising
 
-### Run 'sudo python ble_enableNotify' on target
+## Run 'sudo python ble_enableNotify' on target
