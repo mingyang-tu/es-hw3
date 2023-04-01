@@ -21,7 +21,7 @@ class ScanDelegate(DefaultDelegate):
             print("Received new data from", dev.addr)
     # Processing data of notifications from the server
     def handleNotification(self, cHandle, data): <--
-        print("Received data: " + str(data)) 	 <--
+        print("Received data: " + str(data))     <--
 ```
 
 ```python
@@ -40,9 +40,9 @@ try :
     print(cccd.read())                          <--
 
     while True:                                 <--
-        if dev.waitForNotifications(1000):  	<--
-            print("Notify!")            		<--
-        print("Waiting...")                 	<--
+        if dev.waitForNotifications(1000):      <--
+            print("Notify!")                    <--
+        print("Waiting...")                     <--
 ```
 
 ## sudo minicom -s
