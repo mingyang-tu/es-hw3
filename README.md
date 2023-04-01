@@ -42,7 +42,7 @@ try :
 	while True:                                 <--
 		if dev.waitForNotifications(1000):  <--
 			print("Notify!")            <--
-		print("Waiting...")                m<--
+		print("Waiting...")                 <--
 ```
 
 ## sudo minicom -s
@@ -63,4 +63,4 @@ Configurations :
 
 Start advertising
 
-## Run 'sudo python ble_enableNotify' on target
+## Run 'sudo python ble_enableNotify.py' on target
