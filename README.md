@@ -1,4 +1,4 @@
-# HW2 ble_enableNotify.py
+# HW3 BLE Central Programming
 
 > Modified from ble_scan_connect.py 
 
@@ -10,21 +10,21 @@
 
 ## Codes added
 
-```
-	class ScanDelegate(DefaultDelegate):
-		def __init__(self):
-			DefaultDelegate.__init__(self)
-		def handleDiscovery(self, dev, isNewDev, isNewData):
-			if isNewDev:
-				print("Discovered device", dev.addr)
-			elif isNewData:
-				print("Received new data from", dev.addr)
-		#Processing data of notifications from the server
-		def handleNotification(self, cHandle, data): <--
-			print("Received data: " + str(data)) <--
+```python
+class ScanDelegate(DefaultDelegate):
+	def __init__(self):
+		DefaultDelegate.__init__(self)
+	def handleDiscovery(self, dev, isNewDev, isNewData):
+		if isNewDev:
+			print("Discovered device", dev.addr)
+		elif isNewData:
+			print("Received new data from", dev.addr)
+	# Processing data of notifications from the server
+	def handleNotification(self, cHandle, data): <--
+		print("Received data: " + str(data)) <--
 ```
 
-```
+```python
 try :
 	testService = dev.getServiceByUUID(UUID(0xfff0))
 	for ch in testService.getCharacteristics():
@@ -40,18 +40,18 @@ try :
 	print(cccd.read())                          <--
 
 	while True:                                 <--
-		if dev.waitForNotifications(1000):  <--
-			print("Notify!")            <--
-		print("Waiting...")                 <--
+		if dev.waitForNotifications(1000):  	<--
+			print("Notify!")            		<--
+		print("Waiting...")                 	<--
 ```
 
 ## sudo minicom -s
 
-Configurations -> Serial port setup -> Serial Device : /dev/tty.usbserial-xxx(checked by 'ls /dev' on terminal)
+Configurations -> Serial port setup -> Serial Device : /dev/tty.usbserial-xxx (checked by `ls /dev` on terminal)
 
 ## sudo minicom
 
-log in raspberry pi
+Log in Raspberry Pi
 
 ## Open iPhone app 'BLE scanner'
 
@@ -63,4 +63,4 @@ Configurations :
 
 Start advertising
 
-## Run 'sudo python ble_enableNotify.py' on target
+## Run `sudo python ble_enableNotify.py` on target
